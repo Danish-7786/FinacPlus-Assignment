@@ -26,19 +26,22 @@ cd backend
 
 # Install dependencies
 npm install
+# Start the Server
+npm run dev
 
 # Create .env file
 cp .env.example .env
 
 # Update .env with your configurations
 
-# if you want the mongodb atlas link of the user contact user at 9054684786
+if you want the mongodb atlas link of the user contact user at 9054684786
 # Example .env content:
+```bash
 PORT=8000
 MONGODB_URI=mongodb://localhost:27017/finacplus
 ACCESS_TOKEN_SECRET = danish123
 ACCESS_TOKEN_EXIPRY=1d
-
+```
 3. ***Set Up the frontend**
  # Navigate to frontend directory
 cd frontend
