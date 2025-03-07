@@ -16,7 +16,7 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository**
 ```bash
 git clone https://github.com/Danish-7786/FinacPlus-Assignment.git
-cd user-registration-system
+cd FinacPlus-Assignment
 ```
 
 
