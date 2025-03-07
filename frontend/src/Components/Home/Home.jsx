@@ -1,6 +1,5 @@
-// HomePage.jsx
 import React, { useState, useEffect } from 'react';
-import { PencilIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {TrashIcon, PencilIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../store/userSlice';
 import { useNavigate } from 'react-router';
@@ -11,7 +10,7 @@ const HomePage = () => {
     
 console.log(userData);
     const dispatch = useDispatch();
-    // Mock user data (replace with actual user data from your backend/state management)
+    
     const [user, setUser] = useState(userData.user);
 
     const [isEditing, setIsEditing] = useState(false);
@@ -24,7 +23,7 @@ console.log(userData);
           navigate("/login");
         }
       }, [user, navigate]);
-    // Update editedUser when user data changes
+ 
     useEffect(() => {
         async function fetchUser(){
         try {
@@ -56,7 +55,7 @@ console.log(userData);
             [name]: value
         }));
 
-        // Clear error when user starts typing
+     
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -67,39 +66,31 @@ console.log(userData);
 
     const validateForm = () => {
         const newErrors = {};
-        
 
-        // Name validation
         if (!editedUser.name.trim()) {
             newErrors.name = 'Name is required';
         } else if (editedUser.name.length < 2) {
             newErrors.name = 'Name must be at least 2 characters';
         }
 
-        // Age validation
         if (!editedUser.age) {
             newErrors.age = 'Age is required';
         } else if (isNaN(editedUser.age) || editedUser.age < 0 || editedUser.age > 120) {
             newErrors.age = 'Please enter a valid age between 0 and 120';
         }
 
-        // Date of Birth validation
         if (!editedUser.dateOfBirth) {
             newErrors.dateOfBirth = 'Date of Birth is required';
         }
 
-    
-        // Gender validation
         if (!editedUser.gender) {
             newErrors.gender = 'Please select a gender';
         }
 
-        // About validation (optional field)
         if (editedUser.about && editedUser.about.length > 500) {
             newErrors.about = 'About must not exceed 500 characters';
         }
 
-        
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -110,7 +101,6 @@ console.log(userData);
         setIsSaving(true);
         try {
 
-       
             const response = await axios.put('http://localhost:8000/api/v1/users/update',editedUser,{
                 headers: {
                     Authorization: `Bearer ${userData.accessToken}`
@@ -126,7 +116,6 @@ console.log(userData);
                 alert('Profile updated successfully!');
             }
             
-            // Show success message
         } catch (error) {
             console.error('Error updating profile:', error.response);
             alert('Failed to update profile. Please try again.');
@@ -173,11 +162,11 @@ console.log(userData);
                             <h1 className="text-2xl font-bold text-gray-900">
                                 User Profile
                             </h1>
-                            <button
+                                <button
                                     onClick={() => handleDelete()}
-                                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                    className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >
-                                    <PencilIcon className="h-4 w-4 mr-2" />
+                                    <TrashIcon className="h-4 w-4 mr-2" />
                                     Delete User
                                 </button>
                             {!isEditing ? (
@@ -231,7 +220,7 @@ console.log(userData);
                 <div className="bg-white shadow rounded-lg">
                     <div className="px-4 py-5 sm:p-6">
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                            {/* Name */}
+                        
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Name
@@ -243,7 +232,7 @@ console.log(userData);
                                             name="name"
                                             value={editedUser.name}
                                             onChange={handleInputChange}
-                                            className={`shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${
+                                            className={`p-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${
                                                 errors.name ? 'border-red-300' : ''
                                             }`}
                                         />
@@ -258,7 +247,7 @@ console.log(userData);
                                 )}
                             </div>
 
-                            {/* Email */}
+                         
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Age
@@ -270,7 +259,7 @@ console.log(userData);
                                             name="age"
                                             value={editedUser.age}
                                             onChange={handleInputChange}
-                                            className={`shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${
+                                            className={`shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 block w-full sm:text-sm border-gray-300 rounded-md ${
                                                 errors.age ? 'border-red-300' : ''
                                             }`}
                                         />
@@ -287,7 +276,7 @@ console.log(userData);
 
                             
 
-                            {/* Department */}
+                           
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Gender
@@ -314,7 +303,7 @@ console.log(userData);
                                 )}
                             </div>
 
-                            {/* Phone */}
+                           
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     About
@@ -343,7 +332,7 @@ console.log(userData);
                                 )}
                             </div>
 
-                            {/* Join Date */}
+                        
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Date of Birth
@@ -366,10 +355,6 @@ console.log(userData);
                                     </p>
                                 )}
                             </div>
-
-                            
-
-                        
                           
                         </div>
                     </div>
