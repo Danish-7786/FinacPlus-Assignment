@@ -34,7 +34,7 @@ cp .env.example .env
 
 # Update .env with your configurations
 
-if you want the mongodb atlas link of the user contact user at 9054684786
+if you want the mongodb atlas link of the user contact developer at 9054684786
 # Example .env content:
 ```bash
 PORT=8000
