@@ -7,34 +7,24 @@ import axios from 'axios';
 const HomePage = () => {
     const navigate = useNavigate();
     const userData = useSelector((state)=> state.user.userData);
+    const accessToken = useSelector((state)=> state.user.accessToken);
     
     const dispatch = useDispatch();
     
     const [user, setUser] = useState(userData);
-    if(userData != null){
-        setUser(userData.user);
-    }
+    
     const [isEditing, setIsEditing] = useState(false);
     const [editedUser, setEditedUser] = useState(user);
+  
     const [errors, setErrors] = useState({});
     const [isSaving, setIsSaving] = useState(false);
     
- 
-
-    // useEffect(() => {
-    //     if (!userData) {
-    //         navigate("/login");
-    //         return;
-    //     }
-    //     setUser("")
-    // }, [userData, navigate]);
-
     useEffect(() => {
         async function fetchUser(){
         try {
-            const response = await axios.get("http://localhost:8000/api/v1/users/profile", {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/profile`, {
                 headers: {
-                    Authorization: `Bearer ${userData.accessToken}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             });
                console.log("response",response.data);
@@ -49,9 +39,9 @@ const HomePage = () => {
             console.error("error",error.response);
         }
         
-    }
-    fetchUser();
-}, [user,editedUser]);
+        }
+        fetchUser();
+    }, [accessToken]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -108,7 +98,7 @@ const HomePage = () => {
 
             const response = await axios.put('http://localhost:8000/api/v1/users/update',editedUser,{
                 headers: {
-                    Authorization: `Bearer ${userData.accessToken}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             })
             console.log("update",response.data.data);
@@ -116,6 +106,7 @@ const HomePage = () => {
                 throw new Error('Profile Updation failed!');
             }
             else{
+                setUser(response.data.data)
                 setIsEditing(false);
                 
                 alert('Profile updated successfully!');
@@ -135,7 +126,7 @@ const HomePage = () => {
         try {
             const response = await axios.delete('http://localhost:8000/api/v1/users/profile', {
                 headers: {
-                    Authorization: `Bearer ${userData.accessToken}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             });
 
