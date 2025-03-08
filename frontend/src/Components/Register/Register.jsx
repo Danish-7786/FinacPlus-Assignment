@@ -97,7 +97,7 @@ const Register = () => {
       const { confirmPassword, ...dataToSend } = formData;
       
       const response = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/register`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}api/v1/users/register`,
         dataToSend
       );
       console.log(response.data.data);

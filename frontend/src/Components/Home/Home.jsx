@@ -22,7 +22,7 @@ const HomePage = () => {
     useEffect(() => {
         async function fetchUser(){
         try {
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/profile`, {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}api/v1/users/profile`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -96,7 +96,7 @@ const HomePage = () => {
         setIsSaving(true);
         try {
 
-            const response = await axios.put('http://localhost:8000/api/v1/users/update',editedUser,{
+            const response = await axios.put(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}api/v1/users/update`,editedUser,{
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -124,7 +124,7 @@ const HomePage = () => {
         if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) return;
 
         try {
-            const response = await axios.delete('http://localhost:8000/api/v1/users/profile', {
+            const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}api/v1/users/profile`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }

@@ -64,7 +64,7 @@ const Login = () => {
       setIsSubmitting(true);
       try {
         let response = await axios.post(
-          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/login`,
+          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}api/v1/users/login`,
           formData
         );
         const userData = response.data.data;
