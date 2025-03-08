@@ -15,7 +15,7 @@ function App() {
     if (user) {
       navigate("/home");
     } else {
-      navigate("/login");
+      navigate("/register");
     }
   }, [user, navigate]);
 

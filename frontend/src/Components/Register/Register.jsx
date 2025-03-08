@@ -149,7 +149,7 @@ const Register = () => {
                 className={`w-full px-3 py-2 sm:py-2.5 text-sm sm:text-base border ${
                   errors.name ? "border-red-300" : "border-gray-300"
                 } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
-                placeholder="John Doe"
+                placeholder="Danish Pathan"
               />
               {errors.name && (
                 <p className="mt-1 text-xs sm:text-sm text-red-600">
@@ -239,7 +239,7 @@ const Register = () => {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -350,10 +350,10 @@ const Register = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full flex justify-center items-center px-4 py-2 sm:py-3 border border-transparent rounded-md shadow-sm text-sm sm:text-base font-medium text-white ${
+              className={`w-full flex cursor-pointer justify-center items-center px-4 py-2 sm:py-3 border border-transparent rounded-md shadow-sm text-sm sm:text-base font-medium text-white ${
                 isSubmitting
-                  ? "bg-indigo-400 cursor-not-allowed"
-                  : "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  ? "bg-neutral-600 cursor-not-allowed"
+                  : "bg-neutral-800 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500"
               }`}
             >
               {isSubmitting ? (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {TrashIcon, PencilIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {TrashIcon,UserIcon, PencilIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../store/userSlice';
 import { useNavigate } from 'react-router';
@@ -8,22 +8,27 @@ const HomePage = () => {
     const navigate = useNavigate();
     const userData = useSelector((state)=> state.user.userData);
     
-console.log(userData);
     const dispatch = useDispatch();
     
-    const [user, setUser] = useState(userData.user);
-
+    const [user, setUser] = useState(userData);
+    if(userData != null){
+        setUser(userData.user);
+    }
     const [isEditing, setIsEditing] = useState(false);
     const [editedUser, setEditedUser] = useState(user);
     const [errors, setErrors] = useState({});
     const [isSaving, setIsSaving] = useState(false);
-    useEffect(() => {
-        if (!user) {
-         
-          navigate("/login");
-        }
-      }, [user, navigate]);
+    
  
+
+    // useEffect(() => {
+    //     if (!userData) {
+    //         navigate("/login");
+    //         return;
+    //     }
+    //     setUser("")
+    // }, [userData, navigate]);
+
     useEffect(() => {
         async function fetchUser(){
         try {
@@ -151,7 +156,22 @@ console.log(userData);
         setIsEditing(false);
         setErrors({});
     };
-
+    
+    if(!userData || !user){
+        return (
+        <div className='flex flex-col gap-8 justify-center p-8 items-center'>
+            <h1 className='text-3xl font-extrabold'>Please register to see the User Details</h1>
+            <button
+                    onClick={() => navigate("/register")}
+                    className="inline-flex cursor-pointer w-fit items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                <UserIcon className="h-4 w-4 mr-2" />
+                Register User
+            </button>
+        </div>
+        )
+    }
+    
     return (
         <div className="min-h-screen w-screen bg-gray-50 py-8">
             <div className="max-w-4xl text-black mx-auto px-4 sm:px-6 lg:px-8">
